@@ -32,7 +32,7 @@ function NewRegister() {
       console.log(data);
 
       if (result.data.code === 200) {
-        iniciarSesion(result.data.user);
+        iniciarSesion(result.data.token);
         navigate("/");
         return;
       }
