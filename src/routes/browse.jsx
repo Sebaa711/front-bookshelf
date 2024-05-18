@@ -155,14 +155,23 @@ function Browse() {
   }, [firstTime, location, revalidator]);
 
   function getCurrentPage() {
-    const params = new URLSearchParams(window.location.search);
+    const url = new URL(window.location.href);
+    const fragment = url.hash.substring(1);
+    const tempUrl = new URL("https://dummy.com" + fragment);
+    const params = new URLSearchParams(tempUrl.search);
     return params.get("page") || 1;
   }
 
   function optionRedirect(paramName, value, multiple = false) {
     let newUrl = new URL(window.location.href);
+    const fragment = newUrl.hash.substring(1);
+    newUrl = new URL("https://dummy.com" + fragment);
     if (multiple) {
-      const param = newUrl.searchParams.getAll(paramName);
+      const url = new URL(window.location.href);
+      const fragment = url.hash.substring(1);
+      const tempUrl = new URL("https://dummy.com" + fragment);
+      const param = new URLSearchParams(tempUrl.search);
+
       if (Array.isArray(param) && param.includes(value)) return;
       newUrl.searchParams.append(paramName, value);
     } else newUrl.searchParams.set(paramName, value);
@@ -266,7 +275,10 @@ function RenderResults({ results }) {
   }, []);
   const navigate = useNavigate();
   function getCurrentPage() {
-    const params = new URLSearchParams(window.location.search);
+    const url = new URL(window.location.href);
+    const fragment = url.hash.substring(1);
+    const tempUrl = new URL("https://dummy.com" + fragment);
+    const params = new URLSearchParams(tempUrl.search);
     return params.get("page") || 1;
   }
 
@@ -369,7 +381,11 @@ function Pagination({ currentPage, maxPages, handler }) {
 
 function QueryList() {
   const navigate = useNavigate();
-  const params = new URLSearchParams(window.location.search);
+
+  const url = new URL(window.location.href);
+  const fragment = url.hash.substring(1);
+  const tempUrl = new URL("https://dummy.com" + fragment);
+  const params = new URLSearchParams(tempUrl.search);
 
   const paramsObj = Array.from(
     params.keys().filter((key) => key !== "page")
