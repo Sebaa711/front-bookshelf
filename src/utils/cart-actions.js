@@ -18,10 +18,13 @@ const useCartActions = () => {
         return;
       }
 
-      const response = await axios.post("//localhost:3000/add-to-cart", {
-        token: currentToken,
-        bookId: _id,
-      });
+      const response = await axios.post(
+        import.meta.env.VITE_SERVER_URI + "/add-to-cart",
+        {
+          token: currentToken,
+          bookId: _id,
+        }
+      );
 
       if (response.data.done) {
         setShoppingCartSize((val) => val + 1);
@@ -39,10 +42,13 @@ const useCartActions = () => {
   const removeFromCart = async (_id, img) => {
     setPopUpInfo(null);
     if (!currentToken) return navigate("/log-in");
-    const response = await axios.post("//localhost:3000/remove-from-cart", {
-      token: currentToken,
-      bookId: _id,
-    });
+    const response = await axios.post(
+      import.meta.env.VITE_SERVER_URI + "/remove-from-cart",
+      {
+        token: currentToken,
+        bookId: _id,
+      }
+    );
     if (response.data.done) {
       setShoppingCartSize((val) => val - 1);
       setPopUpInfo({
@@ -56,10 +62,13 @@ const useCartActions = () => {
   const removeFromWishlist = async (_id, img) => {
     setPopUpInfo(null);
     if (!currentToken) return navigate("/log-in");
-    const response = await axios.post("//localhost:3000/remove-from-wishlist", {
-      token: currentToken,
-      bookId: _id,
-    });
+    const response = await axios.post(
+      import.meta.env.VITE_SERVER_URI + "/remove-from-wishlist",
+      {
+        token: currentToken,
+        bookId: _id,
+      }
+    );
     console.log(response.data);
     if (response.data.done) {
       setwishListSize((val) => val - 1);
@@ -75,10 +84,13 @@ const useCartActions = () => {
     setPopUpInfo(null);
 
     if (!currentToken) return navigate("/log-in");
-    const response = await axios.post("//localhost:3000/add-to-wishlist", {
-      token: currentToken,
-      bookId: _id,
-    });
+    const response = await axios.post(
+      import.meta.env.VITE_SERVER_URI + "/add-to-wishlist",
+      {
+        token: currentToken,
+        bookId: _id,
+      }
+    );
     console.log(response.data);
     if (response.data.done) {
       setwishListSize((val) => val + 1);
