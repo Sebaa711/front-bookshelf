@@ -15,7 +15,13 @@ import { getToken } from "../utils/storageUtils";
 import useCartActions from "../utils/cart-actions";
 
 export async function loader() {
-  const params = new URLSearchParams(window.location.search);
+  const url = new URL(window.location.href);
+
+  const fragment = url.hash.substring(1);
+
+  const tempUrl = new URL("https://dummy.com" + fragment);
+
+  const params = new URLSearchParams(tempUrl.search);
   const token = getToken();
   if (token) params.set("token", token);
   let data = null;
