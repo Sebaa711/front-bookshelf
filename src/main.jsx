@@ -2,7 +2,7 @@ import React from "react";
 import "@fontsource/roboto";
 import "@fontsource/oswald";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { RouterProvider, createHashRouter } from "react-router-dom";
 import Layout from "./layout";
 import { AuthProvider } from "./contexts/auth.context";
 import "./main.css";
@@ -16,7 +16,7 @@ import NewLogin from "./routes/newLogin";
 import NewRegister from "./routes/newRegister";
 import UnderConstruction from "./routes/under-construction";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/log-in",
     element: <NewLogin />,
