@@ -30,7 +30,7 @@ export async function loader() {
       import.meta.env.VITE_SERVER_URI + "/browse?" + params.toString()
     );
   } catch (e) {
-    console.log("Error");
+    data = "error";
   }
   return data;
 }
@@ -124,7 +124,7 @@ export function BookCard({ img, name, author, binding, price, _id }) {
   );
 }
 
-function NotFoundSearch() {
+function NotFoundSearch({ text }) {
   useEffect(() => {
     document.title = "No Results";
   }, []);
@@ -134,7 +134,7 @@ function NotFoundSearch() {
       className="go-back mt-3 d-flex align-items-center justify-content-center gap-3"
       to="/browse"
     >
-      <span>Go Back</span>
+      <span>{text || "Go Back"}</span>
       <i className="bi bi-arrow-left-circle-fill"></i>
     </NavLink>
   );
@@ -179,7 +179,21 @@ function Browse() {
     if (paramName !== "page") newUrl.searchParams.delete("page");
     navigate("/browse?" + newUrl.searchParams.toString());
   }
-
+  if (results === "error") {
+    return (
+      <div className="middle-screen flex-column">
+        {" "}
+        <h1
+          style={{ fontFamily: "Oswald", fontStyle: "italic" }}
+          className="text-center"
+        >
+          There was an error with the server, please retry again in a few
+          seconds...
+        </h1>
+        <NotFoundSearch text="Retry" />
+      </div>
+    );
+  }
   if (!results || results.data.books.length === 0)
     return (
       <div className="middle-screen flex-column">
