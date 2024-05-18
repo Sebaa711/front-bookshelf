@@ -102,9 +102,12 @@ function LayoutNavbar() {
     navBarWrapper.current.onmouseenter = () => (navBar.current.style.top = "0"); */
 
     (async () => {
-      const newInfo = await axios.post("//localhost:3000/get-login-info", {
-        token: currentToken,
-      });
+      const newInfo = await axios.post(
+        import.meta.env.VITE_SERVER_URI + "/get-login-info",
+        {
+          token: currentToken,
+        }
+      );
       if (newInfo.status === 200) {
         setInfo(newInfo.data);
         setShoppingCartSize(newInfo.data.shoppingCartLength);

@@ -11,7 +11,9 @@ import useCartActions from "../utils/cart-actions";
 export async function loader({ params }) {
   const token = getToken();
   const result = await axios.get(
-    `//localhost:3000/book/${params.id}${token ? `?token=${token}` : ""}`
+    `${import.meta.env.VITE_SERVER_URI}/book/${params.id}${
+      token ? `?token=${token}` : ""
+    }`
   );
   return result;
 }
