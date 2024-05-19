@@ -85,7 +85,7 @@ export function BookCard({ img, name, author, binding, price, _id }) {
                 setIsInCart(false);
               }}
             >
-              Remove from cart
+              In Cart
             </button>
           ) : (
             <button

@@ -481,12 +481,30 @@ body {
   background-color: var(--primary-darker);
 }
 
-@media (max-width: 500px) {
+@media (max-width: 430px) {
+  .card-book .img-container {
+    width: 100%;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .card-book-buttons {
+    margin-left: auto;
+  }
+
+  .card-book ~ .card-book {
+    border-top: 2px solid #ffffff;
+    padding-top: 20px;
+  }
+}
+
+@media (min-width: 430px) and (max-width: 500px) {
   .img-container img {
-    align-items: start;
+    justify-content: flex-start;
     width: 200px;
     height: auto;
-    margin: auto auto;
     object-fit: contain;
   }
 
@@ -496,7 +514,7 @@ body {
   }
 
   .card-book-details {
-    width: 200px;
+    width: 180px;
     display: flex;
   }
 
