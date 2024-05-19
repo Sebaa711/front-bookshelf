@@ -803,7 +803,7 @@ summary:focus {
   background-color: var(--background-primary);
   display: flex;
   align-items: center;
-  animation: popUpAnimation ease-in-out 5s forwards;
+  animation: popUpAnimation ease-in-out 3s forwards;
   justify-content: center;
   z-index: 1000;
 }
