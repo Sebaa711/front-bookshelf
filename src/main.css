@@ -500,7 +500,7 @@ body {
   }
 }
 
-@media (min-width: 430px) and (max-width: 500px) {
+@media (min-width: 431px) and (max-width: 500px) {
   .img-container img {
     justify-content: flex-start;
     width: 200px;
