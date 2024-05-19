@@ -179,7 +179,7 @@ function LayoutNavbar() {
         <div className="d-flex gap-2 align-items-center">
           {currentToken === null ? (
             <>
-              <NavButton
+              <NavButtonNoRedirect
                 wrapperClassName="search-responsive"
                 className="bi bi-search search-button"
                 onClick={() => searchInput.current.classList.toggle("show")}
@@ -189,7 +189,7 @@ function LayoutNavbar() {
           ) : (
             info !== null && (
               <>
-                <NavButton
+                <NavButtonNoRedirect
                   wrapperClassName="search-responsive"
                   className="bi bi-search search-button"
                   onClick={() => searchInput.current.classList.toggle("show")}
@@ -238,6 +238,25 @@ function NavButton({
       {" "}
       <i className={`nav-button ${className}`}>{children}</i>
     </NavLink>
+  );
+}
+
+function NavButtonNoRedirect({
+  onClick,
+  className,
+  wrapperClassName,
+  size = "1.6rem",
+  children,
+}) {
+  return (
+    <div
+      className={`nav-button-wrapper ${wrapperClassName}`}
+      onClick={onClick}
+      style={{ fontSize: size, cursor: "pointer" }}
+    >
+      {" "}
+      <i className={`nav-button ${className}`}>{children}</i>
+    </div>
   );
 }
 

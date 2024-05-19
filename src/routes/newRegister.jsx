@@ -55,9 +55,9 @@ function NewRegister() {
           className="mockup"
         />
       </div>
-      <div className="form-side position-relative">
-        <div className="position-absolute top-0 me-3">
-          <img src="/bookshelf.png" className="logo" alt="Ofin" />
+      <div className="form-side">
+        <div>
+          <img src="/bookshelf.png" className="logo logo-register" alt="Ofin" />
         </div>
         <FormProvider {...methods}>
           <Form
