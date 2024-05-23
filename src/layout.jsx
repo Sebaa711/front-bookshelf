@@ -273,11 +273,7 @@ function AuthButtons() {
   const navigate = useNavigate();
   return (
     <div className="d-flex align-items-center justify-content-center">
-      <NavButton
-        className="bi bi-person-fill"
-        size="1.77rem"
-        onClick={() => navigate("/log-in")}
-      />
+      <NavButton className="bi bi-person-fill" size="1.77rem" to={"/log-in"} />
     </div>
   );
 }
