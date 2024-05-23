@@ -15,6 +15,7 @@ import Test from "./routes/test";
 import NewLogin from "./routes/newLogin";
 import NewRegister from "./routes/newRegister";
 import UnderConstruction from "./routes/under-construction";
+import { loader as mainLoader } from "./routes/test";
 
 const router = createHashRouter([
   {
@@ -32,6 +33,7 @@ const router = createHashRouter([
       {
         index: true,
         element: <Test />,
+        loader: mainLoader,
       },
       {
         path: "/browse",

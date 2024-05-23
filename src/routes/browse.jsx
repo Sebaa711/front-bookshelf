@@ -13,7 +13,7 @@ import { categories, bindings } from "../utils/searchFilters";
 import { getToken } from "../utils/storageUtils";
 
 import useCartActions from "../utils/cart-actions";
-
+import { onClick as buttonEffect } from "../utils/buttonClickedCircle";
 export async function loader() {
   const url = new URL(window.location.href);
 
@@ -76,42 +76,44 @@ export function BookCard({ img, name, author, binding, price, _id }) {
         <span style={{ opacity: 0.8 }}>{binding}</span>
         <span style={{ fontSize: "1.3rem", fontWeight: 800 }}>${price}</span>
         <div className="card-book-buttons mt-2 justify-content-start">
-          {isInCart ? (
-            <button
-              className="remove-from-cart"
-              onClick={async (e) => {
-                e.stopPropagation();
-                await removeFromCart(_id, img);
-                setIsInCart(false);
-              }}
-            >
-              In Cart
-            </button>
-          ) : (
-            <button
-              className="add-to-cart"
-              onClick={async (e) => {
-                e.stopPropagation();
-                await addToCart(_id, img);
-                setIsInCart(true);
-              }}
-            >
-              Add To Cart
-            </button>
-          )}
+          <div
+            className="buttonWrapper buttonWrapper-card position-relative"
+            onClick={(e) => buttonEffect(e)}
+          >
+            {isInCart ? (
+              <button
+                className="remove-from-cart"
+                onClick={async () => {
+                  await removeFromCart(_id, img);
+                  setIsInCart(false);
+                }}
+              >
+                In Cart
+              </button>
+            ) : (
+              <button
+                className="add-to-cart"
+                onClick={async () => {
+                  await addToCart(_id, img);
+                  setIsInCart(true);
+                }}
+              >
+                Add To Cart
+              </button>
+            )}
+          </div>
+
           <i
             className={`d-flex bi align-items-center justify-content-start ms-3 wishlistButton ${
               isInWish ? `wish-added bi-heart-fill` : "bi-heart"
             }`}
             onClick={
               isInWish
-                ? async (e) => {
-                    e.stopPropagation();
+                ? async () => {
                     await removeFromWishlist(_id, img);
                     setIsInWish(false);
                   }
-                : async (e) => {
-                    e.stopPropagation();
+                : async () => {
                     await addToWishlist(_id, img);
                     setIsInWish(true);
                   }

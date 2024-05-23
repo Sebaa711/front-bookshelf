@@ -12,6 +12,7 @@ import { AuthContext } from "./contexts/auth.context";
 import axios from "axios";
 import { useForm, FormProvider } from "react-hook-form";
 import { CartContext } from "./contexts/cart.context";
+import { onClick as buttonEffect } from "./utils/buttonClickedCircle";
 
 let debouncedButton = false;
 
@@ -229,15 +230,21 @@ function NavButton({
   children,
 }) {
   return (
-    <NavLink
-      to={to}
-      className={`nav-button-wrapper ${wrapperClassName}`}
-      onClick={onClick}
-      style={{ fontSize: size, cursor: "pointer" }}
-    >
-      {" "}
-      <i className={`nav-button ${className}`}>{children}</i>
-    </NavLink>
+    <div className="wrapperNavLink position-relative">
+      <NavLink
+        to={to}
+        className={`nav-button-wrapper ${wrapperClassName}`}
+        onClick={onClick}
+        style={{ fontSize: size, cursor: "pointer" }}
+      >
+        <div
+          className="buttonWrapper buttonWrapper-nav position-absolute"
+          style={{ inset: 0, zIndex: 1000 }}
+          onClick={buttonEffect}
+        />
+        <i className={`nav-button ${className}`}>{children}</i>
+      </NavLink>
+    </div>
   );
 }
 
@@ -249,13 +256,15 @@ function NavButtonNoRedirect({
   children,
 }) {
   return (
-    <div
-      className={`nav-button-wrapper ${wrapperClassName}`}
-      onClick={onClick}
-      style={{ fontSize: size, cursor: "pointer" }}
-    >
-      {" "}
-      <i className={`nav-button ${className}`}>{children}</i>
+    <div className="buttonWrapper position-relative" onClick={buttonEffect}>
+      <div
+        className={`nav-button-wrapper ${wrapperClassName}`}
+        onClick={onClick}
+        style={{ fontSize: size, cursor: "pointer" }}
+      >
+        {" "}
+        <i className={`nav-button ${className}`}>{children}</i>
+      </div>
     </div>
   );
 }

@@ -7,6 +7,7 @@ import { useLoaderData } from "react-router-dom";
 import { getToken } from "../utils/storageUtils";
 import Accordion from "../utils/accordion";
 import useCartActions from "../utils/cart-actions";
+import { onClick as buttonEffect } from "../utils/buttonClickedCircle";
 
 export async function loader({ params }) {
   const token = getToken();
@@ -114,29 +115,32 @@ function ProductCard() {
         <strong className="fs-3 mt-md">${book.price}</strong>
 
         <div className="card-book-buttons mt-2 d-flex justify-content-start gap-3 mt-md-auto">
-          {isInCart ? (
-            <button
-              className="remove-from-cart"
-              onClick={async (e) => {
-                e.stopPropagation();
-                await removeFromCart(book._id, book.img);
-                setIsInCart(false);
-              }}
-            >
-              Remove from cart
-            </button>
-          ) : (
-            <button
-              className="add-to-cart"
-              onClick={async (e) => {
-                e.stopPropagation();
-                await addToCart(book._id, book.img, book.name);
-                setIsInCart(true);
-              }}
-            >
-              Add To Cart
-            </button>
-          )}
+          <div
+            className="buttonWrapper buttonWrapper-product position-relative"
+            onClick={buttonEffect}
+          >
+            {isInCart ? (
+              <button
+                className="remove-from-cart"
+                onClick={async () => {
+                  await removeFromCart(book._id, book.img);
+                  setIsInCart(false);
+                }}
+              >
+                Remove from cart
+              </button>
+            ) : (
+              <button
+                className="add-to-cart"
+                onClick={async () => {
+                  await addToCart(book._id, book.img, book.name);
+                  setIsInCart(true);
+                }}
+              >
+                Add To Cart
+              </button>
+            )}
+          </div>
           <i
             className={`d-flex bi align-items-center justify-content-center wishlistButton ${
               isInWish ? `wish-added bi-heart-fill` : "bi-heart"
