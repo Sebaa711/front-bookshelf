@@ -26,6 +26,7 @@ function Test() {
         <img
           src="https://cdn.builder.io/api/v1/image/assets%2F12cbceb6be9648e2a8a23b8c10684f0b%2F3d58dcb7e64c4152bf11151669b5224f?format=webp&width=2000"
           className="col-12 col-md-4 img-set-1"
+          alt="Banner Image Mock"
         />
         <div className="wrapper col-12 col-md-4 text-center py-5">
           <h1
@@ -56,6 +57,7 @@ function Test() {
         <img
           src="https://cdn.builder.io/api/v1/image/assets%2F12cbceb6be9648e2a8a23b8c10684f0b%2F0c04c1c9c7744c2398fe7158225aae53?format=webp&width=2000"
           className="col-12 col-md-4 img-set-2"
+          alt="Banner Image Mock 2"
         />
       </div>
       <RecommendedBooks />
@@ -106,7 +108,7 @@ function Test() {
   );
 }
 
-function BookCardMain({ img, price, _id }) {
+function BookCardMain({ img, price, _id, name }) {
   const navigate = useNavigate();
   const [isInCart, setIsInCart] = useState(false);
 
@@ -131,7 +133,7 @@ function BookCardMain({ img, price, _id }) {
       >
         <img
           src={img}
-          alt="Book Cover"
+          alt={`${name}'s book cover`}
           loading="lazy"
           onClick={() => navigate(`/products/${_id}`)}
           style={{ cursor: "pointer", overflow: "hidden", marginTop: "auto" }}

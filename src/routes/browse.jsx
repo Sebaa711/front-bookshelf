@@ -60,7 +60,7 @@ export function BookCard({ img, name, author, binding, price, _id }) {
       <div className="img-container" style={{ height: 313 }}>
         <img
           src={img}
-          alt="Book Cover"
+          alt={`${name}'s book cover`}
           loading="lazy"
           onClick={() => navigate(`/products/${_id}`)}
           style={{ cursor: "pointer" }}

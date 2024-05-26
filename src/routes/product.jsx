@@ -28,6 +28,7 @@ export default function Product({ imgSize = 250 }) {
         <div className="img-container d-flex justify-content-center align-items-center col-12 col-md-3">
           <img
             src={book.img}
+            alt={`${book.name}'s cover`}
             className="img-fluid"
             style={{ maxWidth: imgSize }}
           />
