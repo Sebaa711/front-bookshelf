@@ -228,9 +228,10 @@ function NavButton({
   size = "1.6rem",
   to,
   children,
+  id,
 }) {
   return (
-    <div className="wrapperNavLink position-relative">
+    <div className="wrapperNavLink position-relative" id={id}>
       <NavLink
         to={to}
         className={`nav-button-wrapper ${wrapperClassName}`}
@@ -253,10 +254,15 @@ function NavButtonNoRedirect({
   className,
   wrapperClassName,
   size = "1.6rem",
+  id,
   children,
 }) {
   return (
-    <div className="buttonWrapper position-relative" onClick={buttonEffect}>
+    <div
+      className="buttonWrapper position-relative"
+      onClick={buttonEffect}
+      id={id}
+    >
       <div
         className={`nav-button-wrapper ${wrapperClassName}`}
         onClick={onClick}
@@ -302,10 +308,18 @@ function LoggedButtons({ info }) {
 
   return (
     <>
-      <NavButton className="bi bi-heart position-relative mt-1" to="/wishlist">
+      <NavButton
+        className="bi bi-heart position-relative mt-1"
+        id="wishList-button"
+        to="/wishlist"
+      >
         {wishListSize > 0 && <NavButtonBadge value={wishListSize} />}
       </NavButton>
-      <NavButton className="bi bi-cart4 position-relative" to="/cart">
+      <NavButton
+        className="bi bi-cart4 position-relative cart-icon cart-button"
+        id="cart-button"
+        to="/cart"
+      >
         {shoppingCartSize > 0 && <NavButtonBadge value={shoppingCartSize} />}
       </NavButton>
       <img

@@ -16,6 +16,8 @@ import NewLogin from "./routes/newLogin";
 import NewRegister from "./routes/newRegister";
 import UnderConstruction from "./routes/under-construction";
 import { loader as mainLoader } from "./routes/test";
+import ShoppingCart from "./routes/shoppingCart.";
+import { loader as cartLoader } from "./routes/shoppingCart.";
 
 const router = createHashRouter([
   {
@@ -56,7 +58,8 @@ const router = createHashRouter([
       },
       {
         path: "/cart",
-        element: <UnderConstruction />,
+        element: <ShoppingCart />,
+        loader: cartLoader,
       },
     ],
   },

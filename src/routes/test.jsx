@@ -5,7 +5,6 @@ import { NavLink, useLoaderData, useNavigate } from "react-router-dom";
 import { onClick as buttonEffect } from "../utils/buttonClickedCircle";
 import useCartActions from "../utils/cart-actions";
 import axios from "axios";
-import { auto, right } from "@popperjs/core";
 
 export async function loader() {
   let results = await axios.get(
@@ -61,49 +60,6 @@ function Test() {
         />
       </div>
       <RecommendedBooks />
-      <h1 className="title-home w-100 text-center my-5">What is Bookshelf?</h1>
-      <div className="container-md my-5">
-        <p className="fs-4">
-          Bookshelf is a clone of{" "}
-          <a
-            href="https://bookoutlet.com/"
-            target="_blank"
-            style={{ textDecoration: "none", color: "var(--primary-color)" }}
-          >
-            BookOutlet
-          </a>
-          !
-        </p>
-        <p className="fs-4">
-          <strong>Bookshelf is planned to have the following features:</strong>
-        </p>
-
-        <br />
-        <ul className="features-list">
-          <FeatureItemTitle
-            icon="bi bi-shield-lock-fill"
-            name="Authentication"
-            status="completed"
-          />
-
-          <FeatureItemTitle
-            icon="bi bi-search"
-            name="Searching & Sorting"
-            status="completed"
-          />
-          <FeatureItemTitle
-            icon="bi bi-heart-fill"
-            name="Wishlist"
-            status="wip"
-          />
-          <FeatureItemTitle
-            icon="bi bi-cart-fill"
-            name="Shopping Cart"
-            status="wip"
-          />
-          <FeatureItemTitle icon="bi bi-ticket-fill" name="Coupons" />
-        </ul>
-      </div>
     </div>
   );
 }
@@ -129,7 +85,7 @@ function BookCardMain({ img, price, _id, name }) {
     >
       <div
         className="img-container img-container-main d-flex justify-content-center align-items-center"
-        style={{ height: 300, width: auto, overflow: "hidden" }}
+        style={{ height: 250, width: "auto", overflow: "hidden" }}
       >
         <img
           src={img}
@@ -180,7 +136,7 @@ function RecommendedBooks() {
 
   function scrollLeft() {
     const scrollableDiv = recommenddedBooksRef.current;
-    const newScrollLeft = Math.max(scrollableDiv.scrollLeft - 907, 0);
+    const newScrollLeft = Math.max(scrollableDiv.scrollLeft - 950, 0);
 
     scrollableDiv.scrollTo({
       left: newScrollLeft,
@@ -192,7 +148,7 @@ function RecommendedBooks() {
     const scrollableDiv = recommenddedBooksRef.current;
     const maxScrollLeft = scrollableDiv.scrollWidth - scrollableDiv.clientWidth;
     const newScrollLeft = Math.min(
-      scrollableDiv.scrollLeft + 907,
+      scrollableDiv.scrollLeft + 950,
       maxScrollLeft
     );
 
@@ -205,12 +161,12 @@ function RecommendedBooks() {
   return (
     <>
       <h2 className="title-home w-100 text-center my-5">Recommended Books</h2>
-      <div className="recommended-books container-fluid">
+      <div className="recommended-books">
         <div className="back-button">
           <i className="bi bi-arrow-left-circle" onClick={scrollLeft}></i>
         </div>
         <div
-          className="recommended-container d-flex flex-nowrap mx-4 gap-3"
+          className="recommended-container d-flex flex-nowrap gap-3"
           ref={recommenddedBooksRef}
         >
           <div className="recommended-section d-flex flex-nowrap">
@@ -234,24 +190,6 @@ function RecommendedBooks() {
         </div>
       </div>
     </>
-  );
-}
-
-function FeatureItemTitle({ icon, name, status }) {
-  return (
-    <li className="feature-item">
-      <i className={icon}></i>
-      <span className="feature-name d-flex gap-3">
-        <span>{name}</span>
-        {status === "completed" ? (
-          <i className="bi bi-check-square"></i>
-        ) : status === "wip" ? (
-          <i className="bi bi-cone-striped" style={{ color: "orange" }}></i>
-        ) : (
-          <i className="bi bi-square"></i>
-        )}
-      </span>
-    </li>
   );
 }
 

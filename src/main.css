@@ -888,15 +888,13 @@ summary:focus {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 20px;
 }
 
 .recommended-container {
   overflow-x: auto;
   --gap: 20px;
-  --card-width: 180px;
-  max-width: calc(var(--card-width) * 5);
-  gap: 20px;
-  padding: 0 20px;
+  --card-width: 190px;
   white-space: nowrap;
 }
 
@@ -955,10 +953,33 @@ summary:focus {
 @media (min-width: 1080px) {
   .recommended-container {
     overflow: hidden;
+    max-width: calc(var(--card-width) * 5);
   }
 
   .next-button,
   .back-button {
     display: block;
   }
+}
+
+@media (max-width: 380px) {
+  #wishList-button {
+    display: none;
+  }
+}
+
+.cart-title-cart {
+  -webkit-line-clamp: 1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.cart-item {
+  height: 200px;
+}
+
+.cart-item:nth-child(odd) {
+  background-color: #171616;
 }

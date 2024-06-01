@@ -126,7 +126,7 @@ export function BookCard({ img, name, author, binding, price, _id }) {
   );
 }
 
-function NotFoundSearch({ text }) {
+export function NotFoundSearch({ text }) {
   useEffect(() => {
     document.title = "No Results";
   }, []);
