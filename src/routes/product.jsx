@@ -25,7 +25,7 @@ export default function Product({ imgSize = 250 }) {
   return (
     <div className="main my-5 container-fluid">
       <div className="product-main row">
-        <div className="img-container d-flex justify-content-center align-items-center col-12 col-md-3">
+        <div className="img-container d-flex justify-content-center align-items-start col-12 col-md-4 col-xl-3">
           <img
             src={book.img}
             alt={`${book.name}'s cover`}
@@ -105,7 +105,7 @@ function ProductCard() {
 
   return (
     <>
-      <div className="details-container mt-5 ps-4 d-flex flex-column gap-2 col-12 col-md-9 mt-md-0 ps-md-2">
+      <div className="details-container mt-5 d-flex flex-column gap-2 col-12 col-md-8 mt-md-0 ps-md-2 col-xl-9">
         <h1 className="mb-3" style={{ fontFamily: "Oswald" }}>
           {book.name}
         </h1>

@@ -52,7 +52,7 @@ function ShoppingCart() {
   }
 
   return (
-    <div className="cart-container my-5">
+    <div className="cart-container container-fluid my-5 d-flex flex-column gap-1">
       <CartItems />
     </div>
   );
@@ -74,10 +74,17 @@ function CartItems() {
 
   return (
     <>
-      <h1 style={{ fontFamily: "Oswald" }} className="mb-3 ms-3">
-        Shopping Cart
-      </h1>
       <div className="main-container">
+        <h1 style={{ fontFamily: "Oswald" }} className="mb-3 ms-3">
+          Shopping Cart
+        </h1>
+
+        {currentTotal <= 30 ? (
+          <p className="ms-3 shipping-advice">{`You are $${(
+            30 - currentTotal
+          ).toFixed(2)} away from free shipping`}</p>
+        ) : null}
+
         <div className="cart-books-container">
           {items.map((book) => (
             <CartItem
@@ -95,8 +102,8 @@ function CartItems() {
             />
           ))}
         </div>
-        {/* <Checkout currentTotal={currentTotal} /> */}
       </div>
+      <Checkout currentTotal={currentTotal} />
     </>
   );
 }
@@ -124,7 +131,12 @@ function CartItem({ author, price, img, binding, name, _id, onClick }) {
         </p>
         <strong className="fs-3 mt-auto">${price}</strong>
         <strong
-          style={{ color: "var(--primary-color)", cursor: "pointer" }}
+          style={{
+            color: "var(--primary-color)",
+            cursor: "pointer",
+            display: "inline-flex",
+            width: "max-content",
+          }}
           onClick={onClick}
         >
           Remove from cart
@@ -136,8 +148,21 @@ function CartItem({ author, price, img, binding, name, _id, onClick }) {
 
 function Checkout({ currentTotal }) {
   return (
-    <div className="checkout-container">
-      <h1>Total Price: ${currentTotal}</h1>
+    <div className="checkout-wrapper">
+      <div className="checkout-title">Order Summary</div>
+      <div className="checkout-container">
+        <div className="checkout-row">
+          <span>Total Price: </span> <span>${currentTotal}</span>
+        </div>
+        <div className="checkout-row">
+          <span>Shipping: </span>{" "}
+          <span>{currentTotal >= 30 ? "FREE" : "TBD"}</span>
+        </div>
+        <div className="checkout-row">
+          <span>Discount: </span> <span>N/A</span>
+        </div>
+        <div className="divider" style={{ backgroundColor: "#ffffff" }}></div>
+      </div>
     </div>
   );
 }

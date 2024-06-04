@@ -133,29 +133,36 @@ function BookCardMain({ img, price, _id, name }) {
 function RecommendedBooks() {
   const data = useLoaderData();
   const recommenddedBooksRef = useRef(null);
+  const [debounce, setDebounce] = useState(false);
 
-  function scrollLeft() {
-    const scrollableDiv = recommenddedBooksRef.current;
-    const newScrollLeft = Math.max(scrollableDiv.scrollLeft - 950, 0);
+  function scrollRecommended(right) {
+    if (debounce) return;
+    setDebounce((deb) => !deb);
 
-    scrollableDiv.scrollTo({
-      left: newScrollLeft,
-      behavior: "smooth",
-    });
-  }
+    if (right) {
+      const scrollableDiv = recommenddedBooksRef.current;
+      const maxScrollLeft =
+        scrollableDiv.scrollWidth - scrollableDiv.clientWidth;
+      const newScrollLeft = Math.min(
+        scrollableDiv.scrollLeft + 950,
+        maxScrollLeft
+      );
 
-  function scrollRight() {
-    const scrollableDiv = recommenddedBooksRef.current;
-    const maxScrollLeft = scrollableDiv.scrollWidth - scrollableDiv.clientWidth;
-    const newScrollLeft = Math.min(
-      scrollableDiv.scrollLeft + 950,
-      maxScrollLeft
-    );
+      scrollableDiv.scrollTo({
+        left: newScrollLeft,
+        behavior: "smooth",
+      });
+    } else {
+      const scrollableDiv = recommenddedBooksRef.current;
+      const newScrollLeft = Math.max(scrollableDiv.scrollLeft - 950, 0);
 
-    scrollableDiv.scrollTo({
-      left: newScrollLeft,
-      behavior: "smooth",
-    });
+      scrollableDiv.scrollTo({
+        left: newScrollLeft,
+        behavior: "smooth",
+      });
+    }
+
+    setTimeout(() => setDebounce((deb) => !deb), 800);
   }
 
   return (
@@ -163,7 +170,10 @@ function RecommendedBooks() {
       <h2 className="title-home w-100 text-center my-5">Recommended Books</h2>
       <div className="recommended-books">
         <div className="back-button">
-          <i className="bi bi-arrow-left-circle" onClick={scrollLeft}></i>
+          <i
+            className="bi bi-arrow-left-circle"
+            onClick={() => scrollRecommended(false)}
+          ></i>
         </div>
         <div
           className="recommended-container d-flex flex-nowrap gap-3"
@@ -185,7 +195,7 @@ function RecommendedBooks() {
             ))}
           </div>
         </div>
-        <div className="next-button" onClick={scrollRight}>
+        <div className="next-button" onClick={() => scrollRecommended(true)}>
           <i className="bi bi-arrow-right-circle"></i>
         </div>
       </div>

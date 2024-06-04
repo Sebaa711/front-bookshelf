@@ -953,7 +953,7 @@ summary:focus {
 @media (min-width: 1080px) {
   .recommended-container {
     overflow: hidden;
-    max-width: calc(var(--card-width) * 5);
+    max-width: calc(calc(var(--card-width) * 5) - var(--gap));
   }
 
   .next-button,
@@ -982,4 +982,49 @@ summary:focus {
 
 .cart-item:nth-child(odd) {
   background-color: #171616;
+}
+
+.checkout-title {
+  background-color: var(--container-primary);
+  color: #ffffff;
+  font-family: "Oswald";
+  padding: 5px 15px;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.checkout-container {
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  font-family: "Oswald";
+  padding: 15px 40px;
+}
+
+.checkout-container .checkout-row {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.shipping-advice {
+  font-family: "Oswald";
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.checkout-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkout-wrapper {
+  max-width: 400px;
+}
+
+.checkout-container .divider {
+  width: 100%;
+  height: 1px;
+  padding: 0;
+  margin: 15px 0;
 }
