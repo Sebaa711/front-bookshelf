@@ -39,7 +39,9 @@ function ShoppingCart() {
     document.title = "Cart";
   }, []);
 
-  if (!shoppingCartSize || shoppingCartSize.length === 0) {
+  if (shoppingCartSize === null) return;
+
+  if (shoppingCartSize === 0) {
     return (
       <div className="middle-screen flex-column">
         {" "}
