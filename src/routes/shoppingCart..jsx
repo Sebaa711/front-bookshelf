@@ -52,7 +52,10 @@ function ShoppingCart() {
   }
 
   return (
-    <div className="cart-container container-fluid my-5 d-flex flex-column gap-1">
+    <div
+      className="cart-container container-fluid my-5 d-flex flex-column"
+      style={{ gap: 10 }}
+    >
       <CartItems />
     </div>
   );
@@ -73,17 +76,19 @@ function CartItems() {
   const { removeFromCart } = useCartActions();
 
   return (
-    <>
+    <div id="books-and-details">
       <div className="main-container">
         <h1 style={{ fontFamily: "Oswald" }} className="mb-3 ms-3">
           Shopping Cart
         </h1>
 
-        {currentTotal <= 30 ? (
-          <p className="ms-3 shipping-advice">{`You are $${(
-            30 - currentTotal
-          ).toFixed(2)} away from free shipping`}</p>
-        ) : null}
+        <p className="ms-3 shipping-advice">
+          {currentTotal >= 30
+            ? "You are eligible for FREE shipping"
+            : `You are $${(30 - currentTotal).toFixed(
+                2
+              )} away from FREE shipping`}
+        </p>
 
         <div className="cart-books-container">
           {items.map((book) => (
@@ -91,7 +96,7 @@ function CartItems() {
               {...book}
               key={book.info.isbn}
               onClick={async () => {
-                await removeFromCart(book._id, book.img);
+                await removeFromCart(book._id, book.img, false);
                 removeFromItems(book.info.isbn);
                 (async () => {
                   const total = await getTotal();
@@ -104,7 +109,7 @@ function CartItems() {
         </div>
       </div>
       <Checkout currentTotal={currentTotal} />
-    </>
+    </div>
   );
 }
 
@@ -148,20 +153,39 @@ function CartItem({ author, price, img, binding, name, _id, onClick }) {
 
 function Checkout({ currentTotal }) {
   return (
-    <div className="checkout-wrapper">
-      <div className="checkout-title">Order Summary</div>
-      <div className="checkout-container">
-        <div className="checkout-row">
-          <span>Total Price: </span> <span>${currentTotal}</span>
+    <div id="checkout-sections">
+      <div className="checkout-wrapper">
+        <div className="checkout-title">Coupons</div>
+        <div className="checkout-container">
+          <div className="text-field">
+            <label htmlFor="coupon">
+              Enter your coupon:
+              <input type="text" id="coupon" name="coupon" />
+            </label>
+          </div>
+          <div
+            id="redeem-code-btn-wrapper"
+            className="d-flex justify-content-center my-3"
+          >
+            <button id="redeem-code-btn">Redeem</button>
+          </div>
         </div>
-        <div className="checkout-row">
-          <span>Shipping: </span>{" "}
-          <span>{currentTotal >= 30 ? "FREE" : "TBD"}</span>
+      </div>
+
+      <div className="checkout-wrapper">
+        <div className="checkout-title">Order Summary</div>
+        <div className="checkout-container">
+          <div className="checkout-row">
+            <span>Total Price: </span> <span>${currentTotal}</span>
+          </div>
+          <div className="checkout-row">
+            <span>Discount: </span> <span>N/A</span>
+          </div>
+          <div className="divider" style={{ backgroundColor: "#ffffff" }}></div>
+          <div className="checkout-row">
+            <span>Estimated Total: </span> <span>${currentTotal}</span>
+          </div>
         </div>
-        <div className="checkout-row">
-          <span>Discount: </span> <span>N/A</span>
-        </div>
-        <div className="divider" style={{ backgroundColor: "#ffffff" }}></div>
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ const useCartActions = () => {
   const navigate = useNavigate();
   const { setPopUpInfo } = useContext(CartContext);
 
-  const addToCart = async (_id, img) => {
+  const addToCart = async (_id, img, showPopUp = true) => {
     try {
       setPopUpInfo(null);
       if (!currentToken) {
@@ -28,18 +28,20 @@ const useCartActions = () => {
 
       if (response.data.done) {
         setShoppingCartSize((val) => val + 1);
-        setPopUpInfo({
-          img,
-          action: "Succesfully added to your cart!",
-          icon: "bi bi-cart-plus popup-done",
-        });
+        if (showPopUp) {
+          setPopUpInfo({
+            img,
+            action: "Succesfully added to your cart!",
+            icon: "bi bi-cart-plus popup-done",
+          });
+        }
       }
     } catch (error) {
       console.error("Error adding to cart:", error);
     }
   };
 
-  const removeFromCart = async (_id, img) => {
+  const removeFromCart = async (_id, img, showPopUp = true) => {
     setPopUpInfo(null);
     if (!currentToken) return navigate("/log-in");
     const response = await axios.post(
@@ -51,11 +53,13 @@ const useCartActions = () => {
     );
     if (response.data.done) {
       setShoppingCartSize((val) => val - 1);
-      setPopUpInfo({
-        img,
-        action: "Succesfully removed from your cart!",
-        icon: "bi bi-cart-dash popup-done pop-up-close",
-      });
+      if (showPopUp) {
+        setPopUpInfo({
+          img,
+          action: "Succesfully removed from your cart!",
+          icon: "bi bi-cart-dash popup-done pop-up-close",
+        });
+      }
     }
   };
 
