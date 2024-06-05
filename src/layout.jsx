@@ -147,7 +147,7 @@ function LayoutNavbar() {
       >
         <div className="gap-1 dp-flex justify-content-center justify-content-md-start">
           <NavLink className="navbar-brand d-flex align-items-center" to="/">
-            <img src="/bookshelf.png" width={150} />
+            <img src="/bookshelf.png" width={150} alt="Bookshelf Logo" />
           </NavLink>
         </div>
         <div className="actions ms-auto me-3 d-flex gap-3 align-items-center">
