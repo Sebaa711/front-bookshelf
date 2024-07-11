@@ -403,16 +403,16 @@ function QueryList() {
   const tempUrl = new URL("https://dummy.com" + fragment);
   const params = new URLSearchParams(tempUrl.search);
 
-  const paramsObj = Array.from(
-    params.keys().filter((key) => key !== "page")
-  ).reduce((acc, val) => {
-    const newAcc = acc;
-    if (newAcc[val]) {
-      newAcc[val] = params.getAll(val);
-    } else newAcc[val] = params.get(val);
+  const paramsObj = Array.from(params.keys())
+    .filter((key) => key !== "page")
+    .reduce((acc, val) => {
+      const newAcc = acc;
+      if (newAcc[val]) {
+        newAcc[val] = params.getAll(val);
+      } else newAcc[val] = params.get(val);
 
-    return newAcc;
-  }, {});
+      return newAcc;
+    }, {});
 
   let result = [];
   Object.entries(paramsObj).forEach((entrie) => {
