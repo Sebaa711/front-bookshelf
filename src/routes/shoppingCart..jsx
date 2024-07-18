@@ -162,7 +162,13 @@ function Checkout({ currentTotal }) {
           <div className="text-field">
             <label htmlFor="coupon">
               Enter your coupon:
-              <input type="text" id="coupon" name="coupon" />
+              <input
+                type="text"
+                id="coupon"
+                name="coupon"
+                readOnly
+                value={"Will be implemented soon"}
+              />
             </label>
           </div>
           <div
